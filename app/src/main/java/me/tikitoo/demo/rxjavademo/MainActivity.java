@@ -1,5 +1,6 @@
 package me.tikitoo.demo.rxjavademo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.List;
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 import me.tikitoo.demo.rxjavademo.model.Contributor;
 import me.tikitoo.demo.rxjavademo.model.User;
+import me.tikitoo.demo.rxjavademo.repo.RepoActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 //        getData();
 //        getDataObservable();
 //        getContributors();
-        getContributorsObservable();
+//        getContributorsObservable();
+        startActivity(new Intent(this, RepoActivity.class));
     }
 
     private void init() {

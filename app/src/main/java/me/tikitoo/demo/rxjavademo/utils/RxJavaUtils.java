@@ -53,6 +53,29 @@ public class RxJavaUtils {
                 System.out.println("Hello " + s + "!");
             }
         });
+
+        Observable.create(new Observable.OnSubscribe<Object>() {
+            @Override
+            public void call(Subscriber<? super Object> subscriber) {
+                subscriber.onNext("");
+                subscriber.onCompleted();
+            }
+        }).subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
     }
 
     public static void onEvent(String... msg) {

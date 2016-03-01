@@ -22,12 +22,23 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    // support
     compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    // commons
+    compile "com.jakewharton:butterknife:7.0.1"
+
+    // rxjava
     compile 'io.reactivex:rxjava:1.0.10'
     compile 'io.reactivex:rxandroid:1.1.0'
-
-    /* retrofit beta2 beta4  */
+    // retrofit     /* retrofit beta2 beta4  */
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    // okhttp3
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    // dagger
+    compile 'com.google.dagger:dagger:2.0.1'
+    compile 'org.glassfish:javax.annotation:10.0-b28' // needed for Dagger
 }

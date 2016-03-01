@@ -2,6 +2,7 @@ package me.tikitoo.demo.rxjavademo.api;
 
 import java.util.List;
 
+import me.tikitoo.demo.rxjavademo.repo.Repo;
 import me.tikitoo.demo.rxjavademo.model.Contributor;
 import me.tikitoo.demo.rxjavademo.model.User;
 import retrofit2.Call;
@@ -35,4 +36,6 @@ public interface GithubService {
     Call<List<Contributor>> getContributors(@Path("owner") String owner, @Path("repo") String repo);
 
 
+    @GET("/users/google/repos")
+    Observable<List<Repo>> getReposRx();
 }
