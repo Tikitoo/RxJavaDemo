@@ -35,7 +35,6 @@ public class RepoActivity extends AppCompatActivity implements RepoView {
         init();
         setupReyclerView();
         createPresenter();
-
     }
 
     private void setupReyclerView() {
@@ -46,7 +45,6 @@ public class RepoActivity extends AppCompatActivity implements RepoView {
 
     private void init() {
         mGithubService = RetrofitService.getInstance().create();
-
         mAdapter = new RepoListAdapter();
     }
 
@@ -55,7 +53,6 @@ public class RepoActivity extends AppCompatActivity implements RepoView {
         mRepoPresenter.setView(this);
         mRepoPresenter.loadRepoList();
     }
-
 
     @Override
     public void showRepos(List<Repo> repos) {
@@ -76,6 +73,5 @@ public class RepoActivity extends AppCompatActivity implements RepoView {
     public void showMessage(String message) {
         Toast.makeText(this, "msg: " + message, Toast.LENGTH_SHORT).show();
     }
-
 
 }
