@@ -2,17 +2,25 @@ package me.tikitoo.demo.rxjavademo.repo;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RepoPresenterImpl implements RepoPresenter {
+public class RepoPresenterImpl implements RepoPresenter<RepoView> {
     private GithubService mGithubService;
     private RepoView mRepoView;
 
-    public RepoPresenterImpl(GithubService githubService, RepoView repoView) {
+    @Inject
+    public RepoPresenterImpl(GithubService githubService) {
         mGithubService = githubService;
+    }
+
+
+    @Override
+    public void setView(RepoView repoView) {
         mRepoView = repoView;
     }
 

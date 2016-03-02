@@ -6,6 +6,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".dagger.AndroidApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -22,6 +23,8 @@
             android:label="@string/title_activity_repo">
 
         </activity>
+
+        <activity android:name=".dagger.RepoActivity" />
     </application>
 
 </manifest>

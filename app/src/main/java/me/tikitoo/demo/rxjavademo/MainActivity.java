@@ -3,6 +3,8 @@ package me.tikitoo.demo.rxjavademo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -15,7 +17,6 @@ import java.util.List;
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 import me.tikitoo.demo.rxjavademo.model.Contributor;
 import me.tikitoo.demo.rxjavademo.model.User;
-import me.tikitoo.demo.rxjavademo.repo.RepoActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 //        getDataObservable();
 //        getContributors();
 //        getContributorsObservable();
-        startActivity(new Intent(this, RepoActivity.class));
     }
 
     private void init() {
@@ -184,6 +184,22 @@ public class MainActivity extends AppCompatActivity {
                         + "email: " + user.email + "\n"
                         + "location: " + user.location + "\n"
         );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add:
+                startActivity(new Intent(this, me.tikitoo.demo.rxjavademo.repo.RepoActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initView() {

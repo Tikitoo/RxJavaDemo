@@ -9,6 +9,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.tikitoo.demo.rxjavademo.R;
@@ -51,7 +53,9 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoVi
     }
 
 
+    @Inject
     public RepoListAdapter() {
+        super();
         mRepos = new ArrayList<>();
     }
 

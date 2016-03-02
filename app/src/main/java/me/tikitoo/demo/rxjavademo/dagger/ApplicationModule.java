@@ -17,12 +17,12 @@ public class ApplicationModule {
     }
 
     @Provides
-    public Context privideContext() {
+    public Context provideContext() {
         return mApplication;
     }
 
     @Provides
-    public GithubService providesRetrofitService() {
+    public GithubService provideGithubService() {
         return RetrofitService.getInstance().create();
     }
 }
