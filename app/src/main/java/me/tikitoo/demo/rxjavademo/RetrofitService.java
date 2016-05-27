@@ -1,5 +1,7 @@
 package me.tikitoo.demo.rxjavademo;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -39,6 +41,7 @@ public class RetrofitService {
     public static OkHttpClient createClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(createLogger())
+                .addNetworkInterceptor(new StethoInterceptor())
                 .build();
 
     }
@@ -48,9 +51,7 @@ public class RetrofitService {
                 .client(createClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-
                 .build();
-//        return retrofit;
         return retrofit.create(GithubService.class);
     }
 

@@ -8,6 +8,7 @@ import me.tikitoo.demo.rxjavademo.model.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -37,5 +38,11 @@ public interface GithubService {
 
 
     @GET("/users/google/repos")
-    Observable<List<Repo>> getReposRx();
+    Observable<List<Repo>> getReposRx(
+            @Query("page") Integer page,
+            @Query("per_page") Integer pageSize);
+
+    @GET
+    Observable<List<String>> query(String str);
+
 }

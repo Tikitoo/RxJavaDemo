@@ -48,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
 //        getData();
 //        getDataObservable();
 //        getContributors();
-//        getContributorsObservable();
+        getContributorsObservable();
     }
 
     private void init() {
-        mGithubService = RetrofitService.getInstance().create();
-
+        mSubscription = new CompositeSubscription();
         mList = new ArrayList<>();
         mAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, mList);
         mListView.setAdapter(mAdapter);
 
         mSubscription = new CompositeSubscription();
+        mGithubService = RetrofitService.getInstance().create();
+
     }
 
     /**
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getData() {
         mProgressBar.setVisibility(View.VISIBLE);
+        mText1.setVisibility(View.VISIBLE);
         Call<User> userCall = mGithubService.getUser("tikitoo");
         userCall.enqueue(new Callback<User>() {
             @Override
@@ -92,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
      * see{@link #getData()}
      */
     private void getDataObservable() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mText1.setVisibility(View.VISIBLE);
         Observable<User> userObservable = mGithubService.getUserObservable("tikitoo");
         userObservable
                 .subscribeOn(Schedulers.io())
@@ -123,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getContributors() {
+        mProgressBar.setVisibility(View.VISIBLE);
         final Call<List<Contributor>> contributorCall = mGithubService.getContributors("square", "retrofit");
         contributorCall.enqueue(new Callback<List<Contributor>>() {
             @Override
@@ -144,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getContributorsObservable() {
         Observable<List<Contributor>> listObservable = mGithubService.getContributorsObservable("square", "retrofit");
-        Subscription subscription = listObservable.subscribeOn(Schedulers.io())
+        Subscription subscription = listObservable
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -167,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onNext(List<Contributor> contributors) {
                         listToStringList(contributors);
                         mAdapter.notifyDataSetChanged();
+                        mProgressBar.setVisibility(View.GONE);
+
                     }
                 });
         mSubscription.add(subscription);

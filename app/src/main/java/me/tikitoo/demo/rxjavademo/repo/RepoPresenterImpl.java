@@ -18,7 +18,6 @@ public class RepoPresenterImpl implements RepoPresenter<RepoView> {
         mGithubService = githubService;
     }
 
-
     @Override
     public void setView(RepoView repoView) {
         mRepoView = repoView;
@@ -26,7 +25,7 @@ public class RepoPresenterImpl implements RepoPresenter<RepoView> {
 
     @Override
     public void loadRepoList() {
-        mGithubService.getReposRx()
+        mGithubService.getReposRx(1, 10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Repo>>() {
