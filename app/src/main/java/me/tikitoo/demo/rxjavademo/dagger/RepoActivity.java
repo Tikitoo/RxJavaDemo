@@ -36,7 +36,7 @@ public class RepoActivity extends AppCompatActivity implements RepoView {
         ButterKnife.bind(this);
 
         mRepoComponent = DaggerRepoComponent.builder()
-                .applicationComponent(((AndroidApplication)getApplication()).getAppComponent())
+                .rxComponent(RxApp.getAppComponent(this))
                 .build();
 
         createAdapter();

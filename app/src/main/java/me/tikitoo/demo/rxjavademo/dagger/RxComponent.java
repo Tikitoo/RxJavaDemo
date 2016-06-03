@@ -6,8 +6,8 @@ import android.content.Context;
 import dagger.Component;
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
+@Component(modules = RxModule.class)
+public interface RxComponent {
     Context context();
     GithubService githubService();
 }

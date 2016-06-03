@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format("yyyyMMdd")
+    return formattedDate
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -11,11 +18,39 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+//        manifestPlaceholders.put(TEST_KEY_VALUE, "dev")
+        manifestPlaceholders = [TEST_KEY_VALUE: "dev"]
+
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                            &&'debug'.equals(variant.buildType.name)) {
+                        def apkFile = new File(
+                                output.outputFile.getParent(),
+                                "Mymoney_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+                        output.outputFile = apkFile
+                        println(apkFile.getPath().toString())
+                    }
+                }
+            }
+            manifestPlaceholders.put("TEST_KEY_VALUE", "dev")
+            println(manifestPlaceholders.get("TEST_KEY_VALUE"))
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders.put("TEST_KEY_VALUE", "release")
+            println(manifestPlaceholders.get("TEST_KEY_VALUE"))
         }
     }
 }
@@ -27,7 +62,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
     // commons
-    compile "com.jakewharton:butterknife:7.0.1"
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     // rxjava
     compile 'io.reactivex:rxjava:1.0.10'
@@ -39,12 +74,20 @@ dependencies {
     compile rootProject.ext.libRetrofit
     compile rootProject.ext.libRetrofitConverterGson
     compile rootProject.ext.libRetrofitAdapterRxJava
+
     compile 'com.facebook.stetho:stetho:1.3.1'
     compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+
+
+    provided 'com.google.auto.value:auto-value:1.2-rc1'
+    provided 'com.google.auto.value:auto-value:1.2-rc1'
+    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.0'
 
     // okhttp3
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+
+    compile 'com.squareup.sqlbrite:sqlbrite:0.6.3'
 
     // dagger
     compile 'com.google.dagger:dagger:2.0.2'

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RxJavaDemo</string>
     <string name="title_activity_repo">RepoActivity</string>
+    <string name="new_list">New</string>
 </resources>

@@ -9,10 +9,10 @@ import me.tikitoo.demo.rxjavademo.RetrofitService;
 import me.tikitoo.demo.rxjavademo.api.GithubService;
 
 @Module
-public class ApplicationModule {
-    Application mApplication;
+public class RxModule {
+    private final Application mApplication;
 
-    public ApplicationModule(Application application) {
+    public RxModule(Application application) {
         mApplication = application;
     }
 
